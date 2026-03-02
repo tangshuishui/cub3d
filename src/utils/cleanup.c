@@ -6,11 +6,27 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 18:20:55 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/01 18:24:48 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/02 12:25:42 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	free_map_lines(t_map_list*lst)
+{
+	t_map_list	*tmp;
+
+	while (lst)
+	{
+		tmp = lst->next;
+		// 如果行内容存在，释放字符串
+		if (lst->line)
+			free(lst->line);
+		// 释放节点本身
+		free(lst);
+		lst = tmp;
+	}
+}
 
 // 释放地图相关的内存 (比如二维数组和字符串)
 static void	free_map(t_map *map)
@@ -27,6 +43,8 @@ static void	free_map(t_map *map)
 	if (map->ea_path)
 		free(map->ea_path);
 
+	if (map->raw_lines)
+		free_map_lines(map->raw_lines);
 	// 释放二维地图数组
 	if (map->grid)
 	{

@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 17:54:01 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/01 17:55:13 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/02 12:27:57 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ static void	init_map(t_map *map)
 	map->we_path = NULL;
 	map->ea_path = NULL;
 	// -1 代表还没读取到颜色 (因为 0x000000 是合法的黑色)
-	map->floor_color = -1;  
+	map->floor_color = -1;
 	map->ceil_color = -1;
+	map->raw_lines = NULL;
 }
 
 // 暴露给 main.c 的主初始化函数

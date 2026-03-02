@@ -6,11 +6,11 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 19:14:18 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/01 19:34:52 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/02 16:14:04 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 
 // 检查该行是否是空行
 static int	is_empty_line(char *line)
@@ -37,17 +37,33 @@ static void	parse_texture(t_game *game, char **path_ptr, char *line, int i)
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
 	start = i;
-	while (line[i] && line[i] != ' ' && line[i] != '\n')
+	while (line[i] && line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
 		i++;
 	end = i;
 	
+	if (start == end)
+		exit_err(game, "Missing texture path");
 	*path_ptr = ft_substr(line, start, end - start);
 	if (!*path_ptr)
 		exit_err(game, "Malloc failed for texture path");
+	while (line[i] == ' ' || line[i] == '\t')
+		i++;
+	if (line[i] != '\n' && line[i] != '\0')
+		exit_err(game, "Garbage found after texture path");
+}
+
+static int	valid_elem(char *line, char *id)
+{
+	int	len;
+
+	len = ft_strlen(id);
+	if (ft_strncmp(line, id, len) == 0 && (line[len] == ' ' || line[len] == '\t'))
+		return (1);
+	return (0);
 }
 
 // 调度器：根据标识符分配任务
-void	parse_config(t_game *game, char *line, int *elements)
+static void	parse_config(t_game *game, char *line, int *elements)
 {
 	int	i;
 
@@ -55,49 +71,22 @@ void	parse_config(t_game *game, char *line, int *elements)
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
 	// 判断前两个字符
-	if (ft_strncmp(&line[i], "NO ", 3) == 0)
+	if (valid_elem(&line[i], "NO"))
 		parse_texture(game, &game->map.no_path, line, i + 2);
-	else if (ft_strncmp(&line[i], "SO ", 3) == 0)
+	else if (valid_elem(&line[i], "SO"))
 		parse_texture(game, &game->map.so_path, line, i + 2);
-	else if (ft_strncmp(&line[i], "WE ", 3) == 0)
+	else if (valid_elem(&line[i], "WE"))
 		parse_texture(game, &game->map.we_path, line, i + 2);
-	else if (ft_strncmp(&line[i], "EA ", 3) == 0)
+	else if (valid_elem(&line[i], "EA"))
 		parse_texture(game, &game->map.ea_path, line, i + 2);
-	else if (ft_strncmp(&line[i], "F ", 2) == 0)
+	else if (valid_elem(&line[i], "F"))
 		parse_color(game, &game->map.floor_color, line, i + 1);
-	else if (ft_strncmp(&line[i], "C ", 2) == 0)
+	else if (valid_elem(&line[i], "C"))
 		parse_color(game, &game->map.ceil_color, line, i + 1);
 	else
-		exit_error(game, "Invalid configuration element");
+		exit_err(game, "Invalid configuration element");
 		
 	(*elements)++;
-}
-
-void	parse_map(t_game *game, char *line)
-{
-	char	*temp;
-	int		i;
-
-	// 1. 检查地图里的字符是否合法 (只能是 1, 0, N, S, E, W, 空格, 和末尾的 \n)
-	i = 0;
-	while (line[i] && line[i] != '\n')
-	{
-		if (!ft_strchr("01NSEW ", line[i]))
-			exit_err(game, "Invalid character in map");
-		i++;
-	}
-
-	// 2. 用 ft_strjoin 把新读到的一行拼接到 raw_map_str 上
-	if (game->map.raw_map_str == NULL)
-	{
-		game->map.raw_map_str = ft_strdup(line);
-	}
-	else
-	{
-		temp = ft_strjoin(game->map.raw_map_str, line);
-		free(game->map.raw_map_str);
-		game->map.raw_map_str = temp;
-	}
 }
 
 void	parsing(t_game *game, char *filename)
@@ -138,10 +127,12 @@ void	parsing(t_game *game, char *filename)
 	}
 	close(fd);
 	
+	convert_list_to_grid(game);
 	// 读完文件后，检查是否真的读到了地图
 	if (game->map.grid == NULL)
 		exit_err(game, "No map found in file");
 		
 	// 最后，把地图补齐成矩形，并检查封闭性
-	format_and_validate_map(game);
+	format_map(game);
+	validate_map(game);
 }
