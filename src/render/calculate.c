@@ -6,13 +6,13 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 17:58:31 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/02 18:27:40 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/03 13:18:49 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	cal_lineheight(t_game *game, int *line_height, int *start, int *end)
+void	cal_lineheight(t_game *game)
 {
 	t_ray	*r;
 
@@ -22,78 +22,65 @@ void	cal_lineheight(t_game *game, int *line_height, int *start, int *end)
 
 	// 1. 计算墙体在屏幕上的像素高度
 	// WIN_HEIGHT 是屏幕高度。距离越小，高度越大。
-	*line_height = (int)(WIN_HEIGHT / r->perp_wall_dist);
+	r->line_height = (int)(WIN_HEIGHT / r->perp_wall_dist);
 
 	// 2. 计算绘制的起点（屏幕中心对称）
 	// 将墙体放在屏幕中间：屏幕高度的一半 减去 墙高的一半
-	*start = -*line_height / 2 + WIN_HEIGHT / 2;
+	r->draw_start = -r->line_height / 2 + WIN_HEIGHT / 2;
 	
 	// 防止墙体超出屏幕顶部（溢出保护）
-	if (*start < 0)
-		*start = 0;
+	if (r->draw_start < 0)
+		r->draw_start = 0;
 
 	// 3. 计算绘制的终点
-	*end = *line_height / 2 + WIN_HEIGHT / 2;
+	r->draw_end = r->line_height / 2 + WIN_HEIGHT / 2;
 	
 	// 防止墙体超出屏幕底部
-	if (*end >= WIN_HEIGHT)
-		*end = WIN_HEIGHT - 1;
+	if (r->draw_end >= WIN_HEIGHT)
+		r->draw_end = WIN_HEIGHT - 1;
 }
 
-int	determine_wallcolor(t_game *game)
+void	determine_texture(t_game *game)
 {
 	t_ray	*r;
-	int		color;
 
 	r = &game->ray;
 	// side == 0: 撞到了南北走向的墙 (跨越了 X 轴的网格线)
 	if (r->side == 0)
 	{
 		if (r->step_x > 0)
-			color = COLOR_WEST;  // 射线往右，打中西墙
+			r->tex_dir = 2;// 射线往右，打中西墙
 		else
-			color = COLOR_EAST;  // 射线往左，打中东墙
+			r->tex_dir = 3;// 射线往左，打中东墙
 	}
 	// side == 1: 撞到了东西走向的墙 (跨越了 Y 轴的网格线)
 	else
 	{
 		if (r->step_y > 0)
-			color = COLOR_NORTH; // 射线往下，打中北墙
+			r->tex_dir = 0;// 射线往下，打中北墙
 		else
-			color = COLOR_SOUTH; // 射线往上，打中南墙
+			r->tex_dir = 1;// 射线往上，打中南墙
 	}
-
-	// 可选：给南北面加上简单的阴影效果，增加 3D 立体感
-	if (r->side == 1)
-		color = (color >> 1) & 8355711; 
-
-	return (color);
 }
 
-void	draw_vertical_stripe(t_game *game, int x, int start, int end, int color)
+void	cal_texture(t_game *game)
 {
-	int y;
+	t_ray	*r;
+	t_img	*tex;
 
-	y = 0;
-	// 1. 画天花板：从屏幕顶部 (0) 画到墙壁的顶端
-	while (y < start)
-	{
-		my_mlx_pixel_put(&game->screen, x, y, game->map.ceil_color);
-		y++;
-	}
+	r = &game->ray;
+	tex = &game->textures[r->tex_dir];
+	// 1. 计算 wall_x (0.0 ~ 1.0 之间的浮点数)
+	if (r->side == 0)
+		r->wall_x = game->player.pos_y + r->perp_wall_dist * r->dir_y;
+	else
+		r->wall_x = game->player.pos_x + r->perp_wall_dist * r->dir_x;
+	r->wall_x -= floor(r->wall_x);// 抛弃整数部分，只留小数部分
+	
+	// 2. 将 0.0~1.0 映射到纹理图片的真实宽度上 (例如 64 像素)
+	r->tex_x = (int)(r->wall_x * (double)tex->width);
 
-	// 2. 画墙壁：从墙壁的顶端画到墙壁的底端
-	while (y <= end)
-	{
-		// 注意：后续贴图时，这里的纯色会被替换为从贴图(Texture)中提取的像素颜色
-		my_mlx_pixel_put(&game->screen, x, y, color);
-		y++;
-	}
-
-	// 3. 画地板：从墙壁的底端画到屏幕底部 (WIN_HEIGHT)
-	while (y < WIN_HEIGHT)
-	{
-		my_mlx_pixel_put(&game->screen, x, y, game->map.floor_color);
-		y++;
-	}
+	// 3. 翻转 X 坐标 (防止镜像)
+	if ((r->side == 0 && r->dir_x > 0) || (r->side == 1 && r->dir_y < 0))
+		r->tex_x = tex->width -r->tex_x - 1;
 }

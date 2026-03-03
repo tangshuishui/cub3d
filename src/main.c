@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 17:14:30 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/02 16:45:36 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/03 14:39:34 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,11 @@ int	main(int ac, char **av)
 	// printf("✅ Memory successfully freed. Test finished!\n");
 	
 	init_mlx(&game);
-	init_loop_hooks(game.mlx, render_frame, &game);
+	init_textures(&game);
+
+	init_hooks(&game);
+	
+	mlx_loop_hook(game.mlx, render_frame, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

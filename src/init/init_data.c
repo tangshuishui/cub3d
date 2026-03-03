@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 17:54:01 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/02 12:27:57 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/03 15:52:21 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,21 @@ void	init_data(t_game *game)
 	init_map(&game->map);
 	init_player(&game->player);
 	
+	ft_bzero(&game->ray, sizeof(t_ray));
 	// 初始化纹理结构体
 	i = 0;
 	while (i < 4)
 	{
 		game->textures[i].img_ptr = NULL;
 		game->textures[i].addr = NULL;
+		game->textures[i].width = 0;
+		game->textures[i].height = 0;
 		i++;
 	}
 	
 	// 初始化屏幕双缓冲
 	game->screen.img_ptr = NULL;
 	game->screen.addr = NULL;
+
+	game->last_time = get_time_ms();
 }

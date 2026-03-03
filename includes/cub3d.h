@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 17:17:09 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/02 17:11:34 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/03 16:43:01 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,22 @@
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 600
 
+# define TEX_NORTH 0
+# define TEX_SOUTH 1
+# define TEX_WEST 2
+# define TEX_EAST 3
+
+// Linux X11 Keycodes
+# define KEY_ESC 65307
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+
+# define MOVE_SPEED 3.0
+# define ROT_SPEED 1.5
 
 // 1. 纹理与图像数据结构 (MLX Image)
 typedef struct s_img {
@@ -69,6 +85,12 @@ typedef struct s_ray {
 	int		step_y;
 	int		hit;
 	int		side;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	int		tex_dir;
+	double	wall_x;
+	int		tex_x;
 }	t_ray;
 
 typedef struct s_map_list {
@@ -99,6 +121,8 @@ typedef struct s_game {
 	t_ray		ray;
 	t_img		textures[4];
 	t_img		screen;
+	unsigned long long	last_time;
+	double		frame_time;
 }	t_game;
 
 int		main(int ac, char **av);
@@ -106,6 +130,7 @@ int		main(int ac, char **av);
 //init
 void	init_data(t_game *game);
 void	init_mlx(t_game *game);
+void	init_textures(t_game *game);
 void	exit_err(t_game *game, char *msg);
 
 
@@ -120,10 +145,25 @@ void	init_player_position(t_game *game, int x, int y, char dir);
 
 //render
 int		render_frame(t_game *game);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void	cast_rays(t_game *game, int x);
+void	cal_lineheight(t_game *game);
+void	determine_texture(t_game *game);
+void	cal_texture(t_game *game);
+void	draw_vertical_stripe(t_game *game, int x);
 
+//events
+void	init_hooks(t_game *game);
+int		key_press(int keycode, t_game *game);
+int 	key_release(int keycode, t_game *game);
+int 	close_window(t_game *game);
+void	player_move(t_game *game);
+void	player_rotate(t_game *game);
 
 //utils
 void	free_all(t_game *game);
+unsigned long long	get_time_ms(void);
+void	set_frame(t_game *game);
 
 #endif
 
@@ -171,6 +211,8 @@ typedef struct s_ray {
     int     step_y;
     int     hit;          // 是否撞墙 (1/0)
     int     side;         // 撞击的是NS墙(0)还是EW墙(1)
+	int     tex_dir;      // 记录打中的是哪面墙 (0:NO, 1:SO, 2:WE, 3:EA)
+    double  wall_x;       // 记录射线打在墙壁上的精确横向位置 (0.0 到 1.0)
 } t_ray;
 
 // 4. 地图与配置数据结构 (Map & Config)
@@ -195,4 +237,6 @@ typedef struct s_game {
     t_ray       ray;          // 射线计算状态
     t_img       textures[4];  // 存放已加载的4个方向的墙壁纹理 (0:NO, 1:SO, 2:WE, 3:EA)
     t_img       screen;       // 屏幕双缓冲图像 (每帧画好后一次性推入窗口)
+	unsigned long long  last_time;  // 记录上一帧的时间 (毫秒)
+    double              frame_time; // 这一帧距离上一帧过去了多少秒 (Delta Time)
 } t_game;*/

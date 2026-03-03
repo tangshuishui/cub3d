@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 16:57:23 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/02 18:28:15 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/03 14:25:03 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,14 @@ static void	init_ray(t_game *game, int x)
 	r->map_x = (int)p->pos_x;
 	r->map_y = (int)p->pos_y;
 
-	r->delta_dist_x = fabs(1.0 / r->dir_x);
-	r->delta_dist_y = fabs(1.0 / r->dir_y);
+	if (r->dir_x == 0)
+		r->delta_dist_x = 1e30;
+	else
+		r->delta_dist_x = fabs(1.0 / r->dir_x);
+	if (r->dir_y == 0)
+		r->delta_dist_y = 1e30;
+	else
+		r->delta_dist_y = fabs(1.0 / r->dir_y);
 	r->hit = 0;
 }
 
@@ -85,7 +91,12 @@ static void	perform_dda(t_game *game)
 			r->map_y += r->step_y;
 			r->side = 1; // 撞到了东西走向的墙 (水平墙面)
 		}
-		
+		// 紧急制动：如果射线因为意外飞出了地图边界，强行让它停下！
+		if (r->map_y < 0 || r->map_y >= game->map.height || r->map_x < 0 || r->map_x >= game->map.width)
+		{
+			r->hit = 1;
+			break ;
+		}
 		// 检查是否撞墙
 		if (game->map.grid[r->map_y][r->map_x] == '1')
 			r->hit = 1;
@@ -108,7 +119,7 @@ static void	calculate_perpwalldist(t_game *game)
 		r->perp_wall_dist = 0.0001;
 }
 
-void cast_rays(t_game *game, int x)
+void	cast_rays(t_game *game, int x)
 {
 	init_ray(game, x);
 	calculate_step(game);
