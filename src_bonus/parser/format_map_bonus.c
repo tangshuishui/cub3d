@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 12:58:56 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/03 18:09:24 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/04 15:40:21 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,19 @@ static char	*pad_row(char *old_row, int max_width)
 	}
 	while (i < max_width)
 	{
-		new_row[i] = ' '; // 用空格补齐
+		new_row[i] = ' ';
 		i++;
 	}
 	new_row[max_width] = '\0';
-	free(old_row); // 释放旧的短字符串
+	free(old_row);
 	return (new_row);
 }
 
 void	format_map(t_game *game)
 {
-	int 	i;
+	int		i;
 	char	*new_row;
 
-	//将地图矩形化
 	game->map.width = get_max_width(&game->map);
 	i = 0;
 	while (i < game->map.height)

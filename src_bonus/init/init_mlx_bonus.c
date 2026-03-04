@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 18:00:24 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/03 18:09:41 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/04 13:54:55 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	load_texture(t_game *game, t_img *tex, char *path)
 		exit_err(game, "Failed to get texture data address");
 }
 
-// 主加载函数：按照 0=NO, 1=SO, 2=WE, 3=EA 的顺序存入数组
+// 主加载函数：按照 0=NO, 1=SO, 2=WE, 3=EA, 4=D 的顺序存入数组
 void	init_textures(t_game *game)
 {
 	// 这里的顺序极其重要！必须和你之前 determine_texture_dir 中的设定完全一致
@@ -62,4 +62,5 @@ void	init_textures(t_game *game)
 	load_texture(game, &game->textures[1], game->map.so_path);
 	load_texture(game, &game->textures[2], game->map.we_path);
 	load_texture(game, &game->textures[3], game->map.ea_path);
+	load_texture(game, &game->textures[4], game->map.d_path);
 }

@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 16:46:59 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/03 18:57:23 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/04 15:24:20 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,29 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+static void	init_ray(t_game *game, int x)
+{
+	t_player	*p;
+	t_ray		*r;
+
+	p = &game->player;
+	r = &game->ray;
+	r->camera_x = 2 * x / (double)WIN_WIDTH - 1;
+	r->dir_x = p->dir_x + p->plane_x * r->camera_x;
+	r->dir_y = p->dir_y + p->plane_y * r->camera_x;
+	r->map_x = (int)p->pos_x;
+	r->map_y = (int)p->pos_y;
+	if (r->dir_x == 0)
+		r->delta_dist_x = 1e30;
+	else
+		r->delta_dist_x = fabs(1.0 / r->dir_x);
+	if (r->dir_y == 0)
+		r->delta_dist_y = 1e30;
+	else
+		r->delta_dist_y = fabs(1.0 / r->dir_y);
+	r->hit = 0;
+}
+
 int	render_frame(t_game *game)
 {
 	int	x;
@@ -29,18 +52,17 @@ int	render_frame(t_game *game)
 	set_frame(game);
 	player_move(game);
 	player_rotate(game);
-	
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
-		cast_rays(game, x);
+		init_ray(game, x);
+		cast_rays(game);
 		cal_lineheight(game);
 		determine_texture(game);
 		cal_texture(game);
 		draw_vertical_stripe(game, x);
 		x++;
 	}
-	//新增小地图
 	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->screen.img_ptr, 0, 0);
 	return (0);

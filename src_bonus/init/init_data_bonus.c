@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 17:54:01 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/03 18:09:36 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/04 13:55:57 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	init_map(t_map *map)
 	map->so_path = NULL;
 	map->we_path = NULL;
 	map->ea_path = NULL;
+	map->d_path = NULL;
 	// -1 代表还没读取到颜色 (因为 0x000000 是合法的黑色)
 	map->floor_color = -1;
 	map->ceil_color = -1;
@@ -59,7 +60,7 @@ void	init_data(t_game *game)
 	ft_bzero(&game->ray, sizeof(t_ray));
 	// 初始化纹理结构体
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 	{
 		game->textures[i].img_ptr = NULL;
 		game->textures[i].addr = NULL;

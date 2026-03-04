@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 17:17:09 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/03 19:21:08 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/04 15:24:28 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define TEX_SOUTH 1
 # define TEX_WEST 2
 # define TEX_EAST 3
+# define TEX_DOOR 4
 
 // Linux X11 Keycodes
 # define KEY_ESC 65307
@@ -37,6 +38,7 @@
 # define KEY_D 100
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
+# define KEY_SPACE 32
 
 # define MOVE_SPEED 3.0
 # define ROT_SPEED 1.5
@@ -46,6 +48,7 @@
 # define MMAP_TILE 15//小地图中每一个方格占多少像素
 # define MMAP_VIEW 4//向四周看多远（例如看 4 格，小地图就是 9x9 的网格）
 # define MMAP_OFFSET 20
+# define MMAP_SIZE ((2 * MMAP_VIEW + 1) * MMAP_TILE)
 
 typedef struct s_img {
 	void	*img_ptr;
@@ -72,6 +75,7 @@ typedef struct s_player {
 	bool	key_right;
 }	t_player;
 
+// hit = 2 hit the door
 typedef struct s_ray {
 	double	camera_x;
 	double	dir_x;
@@ -108,6 +112,7 @@ typedef struct s_map {
 	char		*so_path;
 	char		*we_path;
 	char		*ea_path;
+	char		*d_path;
 	int			floor_color;
 	int			ceil_color;
 	t_map_list	*raw_lines;
@@ -119,7 +124,7 @@ typedef struct s_game {
 	t_map		map;
 	t_player	player;
 	t_ray		ray;
-	t_img		textures[4];
+	t_img		textures[5];
 	t_img		screen;
 	unsigned long long	last_time;
 	double		frame_time;
@@ -146,7 +151,7 @@ void	init_player_position(t_game *game, int x, int y, char dir);
 //render
 int		render_frame(t_game *game);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void	cast_rays(t_game *game, int x);
+void	cast_rays(t_game *game);
 void	cal_lineheight(t_game *game);
 void	determine_texture(t_game *game);
 void	cal_texture(t_game *game);
@@ -159,6 +164,7 @@ int		key_press(int keycode, t_game *game);
 int 	key_release(int keycode, t_game *game);
 int 	close_window(t_game *game);
 int		mouse_move_hook(int x, int y, t_game *game);
+void	open_door(t_game *game);
 void	player_move(t_game *game);
 void	player_rotate(t_game *game);
 void	rotate_vectors(t_player *p, double rot_speed);
