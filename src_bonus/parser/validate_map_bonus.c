@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 13:38:12 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/04 16:01:10 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/06 18:32:43 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	check_elements(t_game *game, char **grid)
 		x = -1;
 		while (++x < game->map.width)
 		{
-			if (!ft_strchr("01NSEWD ", grid[y][x]))
+			if (!ft_strchr("01NSEWDA ", grid[y][x]))
 				exit_err(game, "Invalid map character");
 			if (is_player(grid[y][x]))
 			{
@@ -64,7 +64,7 @@ static int	is_valid_door(t_game *game, int x, int y)
 		return (0);
 
 	// 2. 判断横向镶嵌：左边和右边都是墙 ('1')，且上方和下方是可以走的区域 ('0' 或其他)
-	if (grid[y][x - 1] == '1' && grid[y][x + 1] == '1')
+	if ((grid[y][x - 1] == '1' || grid[y][x - 1] == 'A') && (grid[y][x + 1] == '1' || grid[y][x + 1] == 'A'))
 	{
 		if (grid[y - 1][x] == '0' || is_player(grid[y - 1][x]) 
 		|| grid[y + 1][x] == '0' || is_player(grid[y + 1][x])) // 不是虚空
@@ -72,7 +72,7 @@ static int	is_valid_door(t_game *game, int x, int y)
 	}
 	
 	// 3. 判断纵向镶嵌：上方和下方都是墙 ('1')，且左边和右边是可以走的区域
-	if (grid[y - 1][x] == '1' && grid[y + 1][x] == '1')
+	if ((grid[y - 1][x] == '1' || grid[y - 1][x] == 'A') && (grid[y + 1][x] == '1' || grid[y + 1][x] == 'A'))
 	{
 		if (grid[y][x - 1] == '0' || is_player(grid[y][x - 1]) 
 		|| grid[y][x + 1] == '0' || is_player(grid[y][x + 1]))

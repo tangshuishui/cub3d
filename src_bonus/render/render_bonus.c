@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 16:46:59 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/04 15:24:20 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/06 18:20:06 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,23 @@ static void	init_ray(t_game *game, int x)
 	r->hit = 0;
 }
 
+static void	update_animation(t_game *game)
+{
+	unsigned long long	current_time;
+
+	current_time = get_time_ms();
+	if (current_time - game->anim.last_anim_time > 100)
+	{
+		game->anim.anim_frames = (game->anim.anim_frames + 1) % 8; 
+		game->anim.last_anim_time = current_time;
+	}
+}
+
 int	render_frame(t_game *game)
 {
 	int	x;
 
+	update_animation(game);
 	set_frame(game);
 	player_move(game);
 	player_rotate(game);

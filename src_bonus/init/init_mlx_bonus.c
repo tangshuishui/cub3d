@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 18:00:24 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/04 13:54:55 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/06 18:44:19 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,13 @@ void	init_textures(t_game *game)
 	load_texture(game, &game->textures[2], game->map.we_path);
 	load_texture(game, &game->textures[3], game->map.ea_path);
 	load_texture(game, &game->textures[4], game->map.d_path);
+	
+	load_texture(game, &game->anim.anim_wall[0], "./textures/anim/anim_0.xpm");
+	load_texture(game, &game->anim.anim_wall[1], "./textures/anim/anim_1.xpm");
+	load_texture(game, &game->anim.anim_wall[2], "./textures/anim/anim_2.xpm");
+	load_texture(game, &game->anim.anim_wall[3], "./textures/anim/anim_3.xpm");
+	load_texture(game, &game->anim.anim_wall[4], "./textures/anim/anim_4.xpm");
+	load_texture(game, &game->anim.anim_wall[5], "./textures/anim/anim_5.xpm");
+	load_texture(game, &game->anim.anim_wall[6], "./textures/anim/anim_6.xpm");
+	load_texture(game, &game->anim.anim_wall[7], "./textures/anim/anim_7.xpm");
 }

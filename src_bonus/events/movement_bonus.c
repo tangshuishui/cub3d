@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:47:32 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/03 18:58:02 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/06 18:28:55 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	is_wall(t_game *game, double x, double y)
 	if (x < 0 || y < 0 || x >= game->map.width || y >= game->map.height)
 		return (1);
 	c = game->map.grid[(int)y][(int)x];
-	if (c == '1' || c == ' ' || c == 'D')
+	if (c == '1' || c == ' ' || c == 'D' || c == 'A')
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 16:57:23 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/04 15:24:11 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/06 18:52:06 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ static void	perform_dda(t_game *game)
 			r->hit = 1;
 		else if (game->map.grid[r->map_y][r->map_x] == 'D')
 			r->hit = 2;
+		else if (game->map.grid[r->map_y][r->map_x] == 'A')
+			r->hit = 1;
 	}
 }
 

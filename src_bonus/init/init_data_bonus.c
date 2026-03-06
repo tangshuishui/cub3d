@@ -6,13 +6,12 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 17:54:01 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/04 13:55:57 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/06 18:54:39 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-// 将玩家状态初始化
 static void	init_player(t_player *player)
 {
 	player->pos_x = 0.0;
@@ -29,7 +28,6 @@ static void	init_player(t_player *player)
 	player->key_right = false;
 }
 
-// 将地图和纹理数据初始化
 static void	init_map(t_map *map)
 {
 	map->grid = NULL;
@@ -40,25 +38,37 @@ static void	init_map(t_map *map)
 	map->we_path = NULL;
 	map->ea_path = NULL;
 	map->d_path = NULL;
-	// -1 代表还没读取到颜色 (因为 0x000000 是合法的黑色)
 	map->floor_color = -1;
 	map->ceil_color = -1;
 	map->raw_lines = NULL;
 }
 
-// 暴露给 main.c 的主初始化函数
+static void	init_anim(t_poster *anim)
+{
+	int	i;
+
+	i = 0;
+	while (i < 8)
+	{
+		anim->anim_wall[i].img_ptr = NULL;
+		anim->anim_wall[i].addr = NULL;
+		anim->anim_wall[i].width = 0;
+		anim->anim_wall[i].height = 0;
+		i++;
+	}
+	anim->last_anim_time = get_time_ms();
+	anim->anim_frames = 0;
+}
+
 void	init_data(t_game *game)
 {
 	int i;
 
 	game->mlx = NULL;
 	game->win = NULL;
-	
 	init_map(&game->map);
 	init_player(&game->player);
-	
 	ft_bzero(&game->ray, sizeof(t_ray));
-	// 初始化纹理结构体
 	i = 0;
 	while (i < 5)
 	{
@@ -68,10 +78,8 @@ void	init_data(t_game *game)
 		game->textures[i].height = 0;
 		i++;
 	}
-	
-	// 初始化屏幕双缓冲
+	init_anim(&game->anim);
 	game->screen.img_ptr = NULL;
 	game->screen.addr = NULL;
-
 	game->last_time = get_time_ms();
 }

@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 18:20:55 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/04 15:53:37 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/06 17:24:24 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,13 @@ static void	free_graph(t_game *game)
 	{
 		if (game->textures[i].img_ptr)
 			mlx_destroy_image(game->mlx, game->textures[i].img_ptr);
+		i++;
+	}
+	i = 0;
+	while (i < 8)
+	{
+		if (game->anim.anim_wall[i].img_ptr)
+			mlx_destroy_image(game->mlx, game->anim.anim_wall[i].img_ptr);
 		i++;
 	}
 	if (game->screen.img_ptr)

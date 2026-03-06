@@ -33,3 +33,7 @@ cub3d/
     └── utils/              # 【工具与清理模块】
         ├── cleanup.c       # free_map, destroy_images, 释放所有内存
         └── error.c         # 打印 "Error\n" 并输出具体原因，随后安全退出
+
+
+https://free-game-assets.itch.io/free-industrial-zone-tileset-pixel-art
+https://totuslotus.itch.io/free-pixel-art-tiles

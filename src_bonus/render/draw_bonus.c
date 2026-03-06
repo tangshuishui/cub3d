@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 16:11:06 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/04 14:23:16 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/06 18:31:25 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,35 @@ static int	get_tex_color(t_img *tex, int x, int y)
 	return (*(unsigned int *)dst);
 }
 
-static void	draw_wall(t_game *game, t_img *tex, int x)
+// static void	draw_wall(t_game *game, t_img *tex, int x)
+// {
+// 	int		tex_y;
+// 	int		color;
+// 	int		y;
+// 	double	tex_pos;
+// 	double	step;
+
+// 	prepare_tex(game, tex, &step, &tex_pos);
+// 	y = game->ray.draw_start;
+// 	while (y <= game->ray.draw_end)
+// 	{
+// 		tex_y = (int)tex_pos & (tex->height - 1);
+// 		tex_pos += step;
+// 		color = get_tex_color(tex, game->ray.tex_x, tex_y);
+// 		if (game->ray.side == 1)
+// 			color = (color >> 1) & 8355711;
+// 		my_mlx_pixel_put(&game->screen, x, y, color);
+// 		y++;
+// 	}
+// }
+
+static void draw_wall(t_game *game, t_img *tex, int x)
 {
-	int		tex_y;
-	int		color;
-	int		y;
-	double	tex_pos;
-	double	step;
+	int     tex_y;
+	int     color;
+	int     y;
+	double  tex_pos;
+	double  step;
 
 	prepare_tex(game, tex, &step, &tex_pos);
 	y = game->ray.draw_start;
@@ -47,13 +69,24 @@ static void	draw_wall(t_game *game, t_img *tex, int x)
 	{
 		tex_y = (int)tex_pos & (tex->height - 1);
 		tex_pos += step;
+		
+		// 核心修改：判断地图标志
 		color = get_tex_color(tex, game->ray.tex_x, tex_y);
+		if (game->map.grid[game->ray.map_y][game->ray.map_x] == 'A') // 'A' 代表动画墙
+		{
+			t_img *anim_tex = &game->anim.anim_wall[game->anim.anim_frames];
+			int anim_color = get_tex_color(anim_tex, game->ray.tex_x, tex_y);
+			if ((anim_color & 0x00FFFFFF) != 0x000000) // 只有非透明部分才覆盖
+				color = anim_color;
+		}
+
 		if (game->ray.side == 1)
 			color = (color >> 1) & 8355711;
 		my_mlx_pixel_put(&game->screen, x, y, color);
 		y++;
 	}
 }
+
 
 void	draw_vertical_stripe(t_game *game, int x)
 {

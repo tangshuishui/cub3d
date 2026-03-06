@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 17:17:09 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/04 15:24:28 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/06 17:33:59 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,12 @@ typedef struct s_map {
 	t_map_list	*raw_lines;
 }	t_map;
 
+typedef struct s_poster {
+	t_img	anim_wall[8];// 海报有 8 帧
+	int		anim_frames;
+	unsigned long long	last_anim_time;
+}	t_poster;
+
 typedef struct s_game {
 	void		*mlx;
 	void		*win;
@@ -128,6 +134,7 @@ typedef struct s_game {
 	t_img		screen;
 	unsigned long long	last_time;
 	double		frame_time;
+	t_poster	anim;
 }	t_game;
 
 int		main(int ac, char **av);

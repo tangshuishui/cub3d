@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 12:12:59 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/04 15:38:00 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/06 18:23:00 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	check_map_chars(t_game *game, char *line)
 	i = 0;
 	while (line[i] && line[i] != '\n')
 	{
-		if (!ft_strchr("01NSEWD ", line[i]))
+		if (!ft_strchr("01NSEWDA ", line[i]))
 			exit_err(game, "Invalid character in map");
 		i++;
 	}
