@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 18:59:22 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/06 18:31:06 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/08 15:57:57 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ static int	get_mmp_color(t_game *game, int x, int y)
 	if (c == '1')
 		return (0x666666); // 墙：深灰
 	if (c == 'D')
-		return (0x8B4513); // 门：深棕
+		return (0xFFD700); // 门：黄色
 	if (c == 'O')
 		return (0xDEB887); // 打开的门：浅棕
 	if (c == 'A')
-		return (0xFFD700); //animation
+		return (0x8B4513); //animation 深棕
 	return (0xCCCCCC); // 路：浅灰
 }
 

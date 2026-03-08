@@ -37,3 +37,5 @@ cub3d/
 
 https://free-game-assets.itch.io/free-industrial-zone-tileset-pixel-art
 https://totuslotus.itch.io/free-pixel-art-tiles
+https://clavs.itch.io/16x16neon-tileset
+https://karsiori.itch.io/free-pixel-art-neon-signs

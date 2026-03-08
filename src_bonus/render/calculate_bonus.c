@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 17:58:31 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/04 14:14:18 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/08 15:45:18 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ void	cal_texture(t_game *game)
 		r->wall_x = game->player.pos_x + r->perp_wall_dist * r->dir_x;
 	r->wall_x -= floor(r->wall_x);
 	r->tex_x = (int)(r->wall_x * (double)tex->width);
-	if ((r->side == 0 && r->dir_x > 0) || (r->side == 1 && r->dir_y < 0))
+	if ((r->side == 0 && r->dir_x < 0) || (r->side == 1 && r->dir_y > 0))
 		r->tex_x = tex->width -r->tex_x - 1;
 }

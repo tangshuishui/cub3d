@@ -1,10 +1,10 @@
-NO textures/urban/ta6.xpm
-SO textures/urban/ta2.xpm
-WE textures/urban/ta5.xpm
-EA textures/urban/ta7.xpm
+NO ./textures/wall/wall_no.xpm
+SO ./textures/wall/wall_so.xpm
+WE ./textures/wall/wall_we.xpm
+EA ./textures/wall/wall_ea.xpm
 
-F 171,159,135
-C 199,207,225
+F 220,100,0
+C 225,30,0
 
         1111111111111111111111111
         1000000000110000000000001
