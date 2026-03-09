@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 19:14:18 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/02 16:14:04 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/09 22:35:20 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	parsing(t_game *game, char *filename)
 				parse_map(game, line);
 			}
 		}
-		else if (elements == 6 && game->map.grid != NULL)
+		else if (elements == 6 && game->map.raw_lines != NULL)
 		{
 			// 如果已经开始读地图了，又遇到了空行 -> 报错！(地图内不允许空行)
 			free(line);

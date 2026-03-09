@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 19:14:18 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/04 16:06:25 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/09 22:35:14 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	parsing(t_game *game, char *filename)
 			else
 				parse_map(game, line);
 		}
-		else if (elements == 7 && game->map.grid != NULL)
+		else if (elements == 7 && game->map.raw_lines != NULL)
 		{
 			free(line);
 			exit_err(game, "Empty line inside or after the map");

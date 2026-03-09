@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:53:19 by yshi              #+#    #+#             */
-/*   Updated: 2025/07/04 17:23:01 by yshi             ###   ########.fr       */
+/*   Updated: 2026/03/09 22:44:20 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*clean_stash(char *stash)
 	i++;
 	new_stash = malloc(ft_strlen(stash + i) + 1);
 	if (!new_stash)
-		return (NULL);
+		return (free(stash), NULL);
 	while (stash[i])
 		new_stash[j++] = stash[i++];
 	new_stash[j] = '\0';
