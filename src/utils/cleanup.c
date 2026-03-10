@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 18:20:55 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/10 16:13:59 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/10 16:39:30 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,10 @@ void	free_all(t_game *game)
 		game->line = get_next_line(-1);
 	}
 	if (game->fd > 0)
+	{
 		close(game->fd);
+		game->fd = -1;
+	}
 	free_map(&game->map);
 	free_graph(game);
 }

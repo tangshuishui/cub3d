@@ -5,7 +5,7 @@ COLOR_RESET	= \033[0m
 NAME		= cub3D
 BONUS		= cub3D_bonus
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g3
+CFLAGS		= -Wall -Wextra -Werror
 RM			= rm -rf
 
 SRC_DIR		= src/

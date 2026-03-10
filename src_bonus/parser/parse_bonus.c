@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 19:14:18 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/10 15:29:34 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/10 16:46:50 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,5 @@ void	parsing(t_game *game, char *filename)
 		game->line = get_next_line(game->fd);
 	}
 	close(game->fd);
+	game->fd = -1;
 }
