@@ -3,12 +3,13 @@ SO ./textures/wall/wall_so.xpm
 WE ./textures/wall/wall_we.xpm
 EA ./textures/wall/wall_ea.xpm
 DO ./textures/wall/door.xpm
+DO ./textures/wall/door.xpm
 
 
-F 36, 41, 46
+F 36, 41
 C 56, 27, 44
 
-1111111111111
+XXXXXX111A1111
 1000000000001
 1011110111101
 1000010000101

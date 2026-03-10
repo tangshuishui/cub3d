@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:42:32 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/03 14:45:01 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/10 16:09:07 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ void	init_hooks(t_game *game)
 	// 3 是 KeyRelease, 1L<<1 是 KeyReleaseMask
 	mlx_hook(game->win, 3, 1L << 1, key_release, game);
 	// 17 是 DestroyNotify (点红叉)
-	mlx_hook(game->win, 17, 1L << 17, close_window, game);
+	mlx_hook(game->win, 17, 0, close_window, game);
 }

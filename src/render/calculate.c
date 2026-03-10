@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cal_draw.c                                         :+:      :+:    :+:   */
+/*   calculate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 17:58:31 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/03 13:18:49 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/10 15:02:11 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	cal_lineheight(t_game *game)
 	t_ray	*r;
 
 	r = &game->ray;
-	if (r->perp_wall_dist <= 0.0001) // 防止贴墙太近导致除零或高度爆炸
-		r->perp_wall_dist = 0.0001;
 
 	// 1. 计算墙体在屏幕上的像素高度
 	// WIN_HEIGHT 是屏幕高度。距离越小，高度越大。
@@ -49,17 +47,17 @@ void	determine_texture(t_game *game)
 	if (r->side == 0)
 	{
 		if (r->step_x > 0)
-			r->tex_dir = 2;// 射线往右，打中西墙
+			r->tex_dir = TEX_WEST;// 射线往右，打中西墙
 		else
-			r->tex_dir = 3;// 射线往左，打中东墙
+			r->tex_dir = TEX_EAST;// 射线往左，打中东墙
 	}
 	// side == 1: 撞到了东西走向的墙 (跨越了 Y 轴的网格线)
 	else
 	{
 		if (r->step_y > 0)
-			r->tex_dir = 0;// 射线往下，打中北墙
+			r->tex_dir = TEX_NORTH;// 射线往下，打中北墙
 		else
-			r->tex_dir = 1;// 射线往上，打中南墙
+			r->tex_dir = TEX_SOUTH;// 射线往上，打中南墙
 	}
 }
 

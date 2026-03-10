@@ -34,8 +34,12 @@ cub3d/
         ├── cleanup.c       # free_map, destroy_images, 释放所有内存
         └── error.c         # 打印 "Error\n" 并输出具体原因，随后安全退出
 
-
+texture:
 https://free-game-assets.itch.io/free-industrial-zone-tileset-pixel-art
 https://totuslotus.itch.io/free-pixel-art-tiles
 https://clavs.itch.io/16x16neon-tileset
 https://karsiori.itch.io/free-pixel-art-neon-signs
+
+DDA:
+https://lodev.org/cgtutor/raycasting.html
+

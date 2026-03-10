@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:42:32 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/04 14:28:37 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/10 15:57:41 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	key_press(int keycode, t_game *game)
 	{
 		free_all(game);
 		exit(0);
+		return (0);
 	}
 	if (keycode == KEY_SPACE)
 		open_door(game);

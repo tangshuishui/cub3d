@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 17:17:09 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/03 16:43:01 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/10 11:55:07 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ typedef struct s_game {
 	t_img		screen;
 	unsigned long long	last_time;
 	double		frame_time;
+	int			fd;
+	char		*line;
 }	t_game;
 
 int		main(int ac, char **av);

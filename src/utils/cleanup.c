@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 18:20:55 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/02 12:25:42 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/10 16:13:59 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,12 @@ static void	free_graph(t_game *game)
 			mlx_destroy_image(game->mlx, game->textures[i].img_ptr);
 		i++;
 	}
-
-	// 2. 销毁屏幕双缓冲图像
-	if (game->screen.img_ptr)
-		mlx_destroy_image(game->mlx, game->screen.img_ptr);
-
-	// 3. 销毁窗口
-	if (game->win)
-		mlx_destroy_window(game->mlx, game->win);
-
-	// 4. 销毁 MLX 
 	if (game->mlx)
 	{
+		if (game->win)
+			mlx_destroy_window(game->mlx, game->win);
+		if (game->screen.img_ptr)
+			mlx_destroy_image(game->mlx, game->screen.img_ptr);
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
 	}
@@ -92,6 +86,13 @@ void	free_all(t_game *game)
 {
 	if (!game)
 		return ;
+	if (game->line)
+	{
+		free(game->line);
+		game->line = get_next_line(-1);
+	}
+	if (game->fd > 0)
+		close(game->fd);
 	free_map(&game->map);
 	free_graph(game);
 }

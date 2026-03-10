@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 12:12:59 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/02 12:52:08 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/10 15:14:22 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static char	*dup_without_newline(char *line)
 // 创建新节点并挂载到链表尾部
 static void	add_to_list(t_game *game, char *clean_line)
 {
-	t_map_list  *node;
-	t_map_list  *tmp;
+	t_map_list	*node;
+	t_map_list	*tmp;
 
 	node = malloc(sizeof(t_map_list));
 	if (!node)

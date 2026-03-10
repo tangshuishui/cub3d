@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 17:54:01 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/06 18:54:39 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/10 12:16:31 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,6 @@ void	init_data(t_game *game)
 	game->screen.img_ptr = NULL;
 	game->screen.addr = NULL;
 	game->last_time = get_time_ms();
+	game->fd = -1;
+	game->line = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 19:14:18 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/09 22:35:14 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/10 15:29:34 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,42 +81,31 @@ static void	parse_config(t_game *game, char *line, int *elements)
 		parse_color(game, &game->map.ceil_color, line, i + 1);
 	else
 		exit_err(game, "Invalid configuration element");
-		
 	(*elements)++;
 }
 
 void	parsing(t_game *game, char *filename)
 {
-	int		fd;
-	char	*line;
 	int		elements;
 
 	elements = 0;
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
+	game->fd = open(filename, O_RDONLY);
+	if (game->fd < 0)
 		exit_err(game, "Cannot open .cub file");
-	line = get_next_line(fd);
-	while (line != NULL)
+	game->line = get_next_line(game->fd);
+	while (game->line != NULL)
 	{
-		if (!is_empty_line(line))
+		if (!is_empty_line(game->line))
 		{
 			if (elements < 7)
-				parse_config(game, line, &elements);
+				parse_config(game, game->line, &elements);
 			else
-				parse_map(game, line);
+				parse_map(game, game->line);
 		}
 		else if (elements == 7 && game->map.raw_lines != NULL)
-		{
-			free(line);
 			exit_err(game, "Empty line inside or after the map");
-		}
-		free(line);
-		line = get_next_line(fd);
+		free(game->line);
+		game->line = get_next_line(game->fd);
 	}
-	close(fd);
-	convert_list_to_grid(game);
-	if (game->map.grid == NULL)
-		exit_err(game, "No map found in file");
-	format_map(game);
-	validate_map(game);
+	close(game->fd);
 }

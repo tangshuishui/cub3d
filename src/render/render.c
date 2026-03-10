@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 16:46:59 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/03 16:41:24 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/10 12:46:28 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 int	render_frame(t_game *game)
 {
-	int					x;
+	int	x;
 
 	set_frame(game);
 	player_move(game);

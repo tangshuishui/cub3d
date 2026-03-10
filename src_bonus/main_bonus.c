@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 17:14:30 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/06 17:39:38 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/10 15:29:03 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ int	main(int ac, char **av)
 	}
 	init_data(&game);
 	parsing(&game, av[1]);
-	
+	convert_list_to_grid(&game);
+	if (game.map.grid == NULL)
+		exit_err(&game, "No map found in file");
+	format_map(&game);
+	validate_map(&game);
 	init_mlx(&game);
 	init_textures(&game);
 

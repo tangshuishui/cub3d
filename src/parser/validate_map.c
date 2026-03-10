@@ -6,7 +6,7 @@
 /*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 13:38:12 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/09 22:41:19 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/10 15:20:55 by hanwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,6 @@ static void	check_elements(t_game *game, char **grid)
 		{
 			if (!ft_strchr("01NSEW ", grid[y][x]))
 				exit_err(game, "Invalid map character");
-			
-			// {
-			// 	printf("Error\nInvalid map character: %c\n", grid[y][x]);
-			// 	free(game);
-			// 	exit (1);
-			// }
-			
 			if (is_player(grid[y][x]))
 			{
 				player_count++;
