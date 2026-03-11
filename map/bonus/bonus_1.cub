@@ -1,0 +1,20 @@
+NO ./textures/wall/wall_no_1.xpm
+SO ./textures/wall/wall_so.xpm
+WE ./textures/wall/wall_we.xpm
+EA ./textures/wall/wall_ea.xpm
+DO ./textures/wall/door.xpm
+
+
+F 36, 41, 46
+C 56, 27, 44
+
+1111111111111
+1000000000001
+1011110111101
+1000010000101
+1111111111111
+1A111A111
+100000001
+1D1D10A01
+100000S01
+11A111A11
