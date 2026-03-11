@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 17:14:30 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/10 15:29:03 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/11 14:53:09 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ int	main(int ac, char **av)
 	validate_map(&game);
 	init_mlx(&game);
 	init_textures(&game);
-
 	init_hooks(&game);
-	
 	mlx_loop_hook(game.mlx, render_frame, &game);
 	mlx_loop(game.mlx);
 	return (0);

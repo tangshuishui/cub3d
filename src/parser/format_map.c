@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   format_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 12:58:56 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/02 13:38:36 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/11 17:00:23 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,9 @@ static char	*pad_row(char *old_row, int max_width)
 
 void	format_map(t_game *game)
 {
-	int 	i;
+	int		i;
 	char	*new_row;
 
-	//将地图矩形化
 	game->map.width = get_max_width(&game->map);
 	i = 0;
 	while (i < game->map.height)

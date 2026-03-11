@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 17:54:01 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/10 12:03:26 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/11 14:54:22 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	init_map(t_map *map)
 	map->so_path = NULL;
 	map->we_path = NULL;
 	map->ea_path = NULL;
-	// -1 代表还没读取到颜色 (因为 0x000000 是合法的黑色)
 	map->floor_color = -1;
 	map->ceil_color = -1;
 	map->raw_lines = NULL;
@@ -48,16 +47,13 @@ static void	init_map(t_map *map)
 // 暴露给 main.c 的主初始化函数
 void	init_data(t_game *game)
 {
-	int i;
+	int	i;
 
 	game->mlx = NULL;
 	game->win = NULL;
-	
 	init_map(&game->map);
 	init_player(&game->player);
-	
 	ft_bzero(&game->ray, sizeof(t_ray));
-	// 初始化纹理结构体
 	i = 0;
 	while (i < 4)
 	{
@@ -67,13 +63,9 @@ void	init_data(t_game *game)
 		game->textures[i].height = 0;
 		i++;
 	}
-	
-	// 初始化屏幕双缓冲
 	game->screen.img_ptr = NULL;
 	game->screen.addr = NULL;
-
 	game->last_time = get_time_ms();
-
 	game->fd = -1;
 	game->line = NULL;
 }

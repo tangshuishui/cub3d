@@ -2,3 +2,5 @@ minilibx-linux
 mlx/
 .vscode
 obj/
+*.o
+*.a

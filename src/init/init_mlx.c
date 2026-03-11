@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 18:00:24 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/03 11:51:57 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/11 15:00:22 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	init_mlx(t_game *game)
 	game->screen.img_ptr = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!game->screen.img_ptr)
 		exit_err(game, "Failed to create screen image");
-	game->screen.addr = mlx_get_data_addr(game->screen.img_ptr, &game->screen.bpp, &game->screen.line_len, &game->screen.endian);
+	game->screen.addr = mlx_get_data_addr(game->screen.img_ptr,
+			&game->screen.bpp, &game->screen.line_len, &game->screen.endian);
 	game->screen.width = WIN_WIDTH;
 	game->screen.height = WIN_HEIGHT;
 }

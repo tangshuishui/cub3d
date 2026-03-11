@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 17:14:30 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/10 16:09:21 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/11 14:34:18 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 // 	int i;
 
 // 	printf("\n================ CUB3D PARSER TEST ================\n");
-	
+
 // 	printf("\n[1] TEXTURE PATHS:\n");
 // 	printf("NO: [%s]\n", game->map.no_path);
 // 	printf("SO: [%s]\n", game->map.so_path);
@@ -75,15 +75,9 @@ int	main(int ac, char **av)
 		exit_err(&game, "No map found in file");
 	format_map(&game);
 	validate_map(&game);
-	// debug_print_parsed_data(&game);
-	// free_all(&game);
-	// printf("✅ Memory successfully freed. Test finished!\n");
-	
 	init_mlx(&game);
 	init_textures(&game);
-
 	init_hooks(&game);
-	
 	mlx_loop_hook(game.mlx, render_frame, &game);
 	mlx_loop(game.mlx);
 	return (0);

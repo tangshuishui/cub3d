@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 17:17:09 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/10 11:55:07 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/11 15:01:55 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,17 +114,17 @@ typedef struct s_map {
 
 // 5. 游戏主结构体 (The God Struct)
 typedef struct s_game {
-	void		*mlx;
-	void		*win;
-	t_map		map;
-	t_player	player;
-	t_ray		ray;
-	t_img		textures[4];
-	t_img		screen;
+	void				*mlx;
+	void				*win;
+	t_map				map;
+	t_player			player;
+	t_ray				ray;
+	t_img				textures[4];
+	t_img				screen;
 	unsigned long long	last_time;
-	double		frame_time;
-	int			fd;
-	char		*line;
+	double				frame_time;
+	int					fd;
+	char				*line;
 }	t_game;
 
 int		main(int ac, char **av);

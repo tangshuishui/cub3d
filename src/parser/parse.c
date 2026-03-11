@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 19:14:18 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/10 16:46:24 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/11 16:52:12 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,14 @@ static void	parse_texture(t_game *game, char **path_ptr, char *line, int i)
 	int	start;
 	int	end;
 
-	if (*path_ptr != NULL) // 如果已经有了，说明文件里重复定义了，报错
+	if (*path_ptr != NULL)
 		exit_err(game, "Duplicate texture definition");
-	
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
 	start = i;
 	while (line[i] && line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
 		i++;
 	end = i;
-	
 	if (start == end)
 		exit_err(game, "Missing texture path");
 	*path_ptr = ft_substr(line, start, end - start);
@@ -57,7 +55,8 @@ static int	valid_elem(char *line, char *id)
 	int	len;
 
 	len = ft_strlen(id);
-	if (ft_strncmp(line, id, len) == 0 && (line[len] == ' ' || line[len] == '\t'))
+	if (ft_strncmp(line, id, len) == 0 &&
+		(line[len] == ' ' || line[len] == '\t'))
 		return (1);
 	return (0);
 }
@@ -70,7 +69,6 @@ static void	parse_config(t_game *game, char *line, int *elements)
 	i = 0;
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
-	// 判断前两个字符
 	if (valid_elem(&line[i], "NO"))
 		parse_texture(game, &game->map.no_path, line, i + 2);
 	else if (valid_elem(&line[i], "SO"))
@@ -102,22 +100,12 @@ void	parsing(t_game *game, char *filename)
 		if (!is_empty_line(game->line))
 		{
 			if (elements < 6)
-			{
-				// 还没找齐 6 个配置，去解析路径和颜色
 				parse_config(game, game->line, &elements);
-			}
 			else
-			{
-				// 已经找齐 6 个配置，剩下的统统当成地图来读
-				// 注意：如果地图中间出现空行，要在 parse_map 里报错
 				parse_map(game, game->line);
-			}
 		}
 		else if (elements == 6 && game->map.raw_lines != NULL)
-		{
-			// 如果已经开始读地图了，又遇到了空行 -> 报错！(地图内不允许空行)
 			exit_err(game, "Empty line inside or after the map");
-		}
 		free(game->line);
 		game->line = get_next_line(game->fd);
 	}
