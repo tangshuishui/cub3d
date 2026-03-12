@@ -6,7 +6,7 @@
 /*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 19:14:18 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/11 16:52:12 by yshi             ###   ########.fr       */
+/*   Updated: 2026/03/12 17:29:21 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ static int	valid_elem(char *line, char *id)
 	int	len;
 
 	len = ft_strlen(id);
-	if (ft_strncmp(line, id, len) == 0 &&
-		(line[len] == ' ' || line[len] == '\t'))
+	if (ft_strncmp(line, id, len) == 0
+		&& (line[len] == ' ' || line[len] == '\t'))
 		return (1);
 	return (0);
 }

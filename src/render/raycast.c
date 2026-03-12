@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 16:57:23 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/03 14:25:03 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/12 17:22:54 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,14 @@ static void	init_ray(t_game *game, int x)
 {
 	t_player	*p;
 	t_ray		*r;
-	
+
 	p = &game->player;
 	r = &game->ray;
-	// 将屏幕 x 坐标映射到 [-1, 1] 的相机平面空间
 	r->camera_x = 2 * x / (double)WIN_WIDTH - 1;
 	r->dir_x = p->dir_x + p->plane_x * r->camera_x;
 	r->dir_y = p->dir_y + p->plane_y * r->camera_x;
-	
-	// 射线当前所在的网格
 	r->map_x = (int)p->pos_x;
 	r->map_y = (int)p->pos_y;
-
 	if (r->dir_x == 0)
 		r->delta_dist_x = 1e30;
 	else
@@ -45,7 +41,7 @@ static void	calculate_step(t_game *game)
 {
 	t_player	*p;
 	t_ray		*r;
-	
+
 	p = &game->player;
 	r = &game->ray;
 	if (r->dir_x < 0)
@@ -74,30 +70,25 @@ static void	calculate_step(t_game *game)
 static void	perform_dda(t_game *game)
 {
 	t_ray	*r;
-	
+
 	r = &game->ray;
 	while (r->hit == 0)
 	{
-		// 往最近的网格线跳跃
 		if (r->side_dist_x < r->side_dist_y)
 		{
 			r->side_dist_x += r->delta_dist_x;
 			r->map_x += r->step_x;
-			r->side = 0; // 撞到了南北走向的墙 (垂直墙面)
+			r->side = 0;
 		}
 		else
 		{
 			r->side_dist_y += r->delta_dist_y;
 			r->map_y += r->step_y;
-			r->side = 1; // 撞到了东西走向的墙 (水平墙面)
+			r->side = 1;
 		}
-		// 紧急制动：如果射线因为意外飞出了地图边界，强行让它停下！
-		if (r->map_y < 0 || r->map_y >= game->map.height || r->map_x < 0 || r->map_x >= game->map.width)
-		{
+		if (r->map_y < 0 || r->map_y >= game->map.height || r->map_x < 0
+			|| r->map_x >= game->map.width)
 			r->hit = 1;
-			break ;
-		}
-		// 检查是否撞墙
 		if (game->map.grid[r->map_y][r->map_x] == '1')
 			r->hit = 1;
 	}
@@ -107,14 +98,12 @@ static void	perform_dda(t_game *game)
 static void	calculate_perpwalldist(t_game *game)
 {
 	t_ray	*r;
-	
+
 	r = &game->ray;
 	if (r->side == 0)
 		r->perp_wall_dist = (r->side_dist_x - r->delta_dist_x);
 	else
 		r->perp_wall_dist = (r->side_dist_y - r->delta_dist_y);
-
-	// 防止距离为 0 导致除以 0
 	if (r->perp_wall_dist <= 0.0001)
 		r->perp_wall_dist = 0.0001;
 }

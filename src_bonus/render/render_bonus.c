@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 16:46:59 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/06 18:20:06 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/12 18:01:54 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	update_animation(t_game *game)
 	current_time = get_time_ms();
 	if (current_time - game->anim.last_anim_time > 100)
 	{
-		game->anim.anim_frames = (game->anim.anim_frames + 1) % 8; 
+		game->anim.anim_frames = (game->anim.anim_frames + 1) % 8;
 		game->anim.last_anim_time = current_time;
 	}
 }

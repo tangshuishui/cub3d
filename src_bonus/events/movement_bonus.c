@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:47:32 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/06 18:28:55 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/12 17:33:59 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static int	is_wall(t_game *game, double x, double y)
 
 static int	is_valid_pos_b(t_game *game, double x, double y)
 {
-	if (is_wall(game, x + 0.2, y + 0.2) || is_wall(game, x - 0.2, y + 0.2) ||
-		is_wall(game, x + 0.2, y - 0.2) || is_wall(game, x - 0.2, y - 0.2))
+	if (is_wall(game, x + 0.2, y + 0.2) || is_wall(game, x - 0.2, y + 0.2)
+		|| is_wall(game, x + 0.2, y - 0.2) || is_wall(game, x - 0.2, y - 0.2))
 		return (0);
 	return (1);
 }
@@ -35,8 +35,9 @@ static int	is_valid_pos_b(t_game *game, double x, double y)
 // 尝试在 X 和 Y 轴上独立移动，实现“贴墙滑动”
 static void	move_step(t_game *game, double x, double y)
 {
-	t_player *p = &game->player;
+	t_player	*p;
 
+	p = &game->player;
 	if (is_valid_pos_b(game, p->pos_x + x, p->pos_y))
 		p->pos_x += x;
 	if (is_valid_pos_b(game, p->pos_x, p->pos_y + y))
@@ -47,7 +48,7 @@ void	player_move(t_game *game)
 {
 	t_player	*p;
 	double		step;
-	
+
 	p = &game->player;
 	step = MOVE_SPEED * game->frame_time;
 	if (p->key_w)

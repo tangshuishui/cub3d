@@ -6,7 +6,7 @@
 /*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 12:58:56 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/11 17:00:23 by yshi             ###   ########.fr       */
+/*   Updated: 2026/03/12 16:27:43 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ static char	*pad_row(char *old_row, int max_width)
 	}
 	while (i < max_width)
 	{
-		new_row[i] = ' '; // 用空格补齐
+		new_row[i] = ' ';
 		i++;
 	}
 	new_row[max_width] = '\0';
-	free(old_row); // 释放旧的短字符串
+	free(old_row);
 	return (new_row);
 }
 

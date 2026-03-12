@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 16:11:06 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/03 16:37:26 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/12 17:29:41 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static int	get_tex_color(t_img *tex, int x, int y)
 {
 	char	*dst;
 
-	// 检查纹理长宽
 	if (x < 0 || x >= tex->width || y < 0 || y >= tex->height)
 		return (0);
 	dst = tex->addr + (y * tex->line_len + x * (tex->bpp / 8));
@@ -46,9 +45,8 @@ static void	draw_wall(t_game *game, t_img *tex, int x)
 	y = game->ray.draw_start;
 	while (y <= game->ray.draw_end)
 	{
-		tex_y = (int)tex_pos & (tex->height - 1);//提取纹理的Y坐标
+		tex_y = (int)tex_pos & (tex->height - 1);
 		tex_pos += step;
-		
 		color = get_tex_color(tex, game->ray.tex_x, tex_y);
 		if (game->ray.side == 1)
 			color = (color >> 1) & 8355711;
@@ -64,14 +62,9 @@ void	draw_vertical_stripe(t_game *game, int x)
 
 	tex = &game->textures[game->ray.tex_dir];
 	y = 0;
-	// 1. 画天花板：从屏幕顶部 (0) 画到墙壁的顶端
 	while (y < game->ray.draw_start)
 		my_mlx_pixel_put(&game->screen, x, y++, game->map.ceil_color);
-
-	// 2. 画墙壁：从墙壁的顶端画到墙壁的底端
 	draw_wall(game, tex, x);
-
-	// 3. 画地板：从墙壁的底端画到屏幕底部 (WIN_HEIGHT)
 	y = game->ray.draw_end + 1;
 	while (y < WIN_HEIGHT)
 		my_mlx_pixel_put(&game->screen, x, y++, game->map.floor_color);

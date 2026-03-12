@@ -6,7 +6,7 @@
 /*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 17:14:30 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/11 14:34:18 by yshi             ###   ########.fr       */
+/*   Updated: 2026/03/12 17:27:24 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,12 @@
 // 	printf("Ceiling (C): 0x%06X\n", game->map.ceil_color);
 
 // 	printf("\n[3] PLAYER & CAMERA:\n");
-// 	printf("Position (x, y)  : (%.2f, %.2f)\n", game->player.pos_x, game->player.pos_y);
-// 	printf("Direction (x, y) : (%.2f, %.2f)\n", game->player.dir_x, game->player.dir_y);
-// 	printf("Camera Plane     : (%.2f, %.2f)\n", game->player.plane_x, game->player.plane_y);
+// 	printf("Position (x, y)  : (%.2f, %.2f)\n",
+// game->player.pos_x, game->player.pos_y);
+// 	printf("Direction (x, y) : (%.2f, %.2f)\n",
+// game->player.dir_x, game->player.dir_y);
+// 	printf("Camera Plane     : (%.2f, %.2f)\n",
+// game->player.plane_x, game->player.plane_y);
 
 // 	printf("\n[4] MAP MATRIX (%d x %d):\n", game->map.width, game->map.height);
 // 	i = 0;

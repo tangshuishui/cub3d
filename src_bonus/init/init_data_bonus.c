@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 17:54:01 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/10 12:16:31 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/12 17:34:27 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	init_anim(t_poster *anim)
 
 void	init_data(t_game *game)
 {
-	int i;
+	int	i;
 
 	game->mlx = NULL;
 	game->win = NULL;

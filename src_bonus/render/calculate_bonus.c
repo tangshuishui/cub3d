@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculate_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 17:58:31 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/08 15:45:18 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/12 18:01:13 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	determine_texture(t_game *game)
 	t_ray	*r;
 
 	r = &game->ray;
-	if (r->hit == 2)//hit the door
+	if (r->hit == 2)
 	{
 		r->tex_dir = 4;
 		return ;
@@ -68,5 +68,5 @@ void	cal_texture(t_game *game)
 	r->wall_x -= floor(r->wall_x);
 	r->tex_x = (int)(r->wall_x * (double)tex->width);
 	if ((r->side == 0 && r->dir_x < 0) || (r->side == 1 && r->dir_y > 0))
-		r->tex_x = tex->width -r->tex_x - 1;
+		r->tex_x = tex->width - r->tex_x - 1;
 }

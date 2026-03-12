@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 19:14:18 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/10 16:46:50 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/12 17:40:22 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static int	valid_elem(char *line, char *id)
 	int	len;
 
 	len = ft_strlen(id);
-	if (ft_strncmp(line, id, len) == 0 && (line[len] == ' ' || line[len] == '\t'))
+	if (ft_strncmp(line, id, len) == 0 && (line[len] == ' '
+			|| line[len] == '\t'))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 17:17:09 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/11 15:01:55 by yshi             ###   ########.fr       */
+/*   Updated: 2026/03/12 17:51:52 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,45 +127,45 @@ typedef struct s_game {
 	char				*line;
 }	t_game;
 
-int		main(int ac, char **av);
+int					main(int ac, char **av);
 
 //init
-void	init_data(t_game *game);
-void	init_mlx(t_game *game);
-void	init_textures(t_game *game);
-void	exit_err(t_game *game, char *msg);
-
+void				init_data(t_game *game);
+void				init_mlx(t_game *game);
+void				init_textures(t_game *game);
+void				exit_err(t_game *game, char *msg);
 
 //parse
-void	parsing(t_game *game, char *filename);
-void	parse_color(t_game *game, int *color_ptr, char *line, int i);
-void	parse_map(t_game *game, char *line);
-void	convert_list_to_grid(t_game *game);
-void	format_map(t_game *game);
-void	validate_map(t_game *game);
-void	init_player_position(t_game *game, int x, int y, char dir);
+void				parsing(t_game *game, char *filename);
+void				parse_color(t_game *game, int *color_ptr, char *line,
+						int i);
+void				parse_map(t_game *game, char *line);
+void				convert_list_to_grid(t_game *game);
+void				format_map(t_game *game);
+void				validate_map(t_game *game);
+void				init_player_position(t_game *game, int x, int y, char dir);
 
 //render
-int		render_frame(t_game *game);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void	cast_rays(t_game *game, int x);
-void	cal_lineheight(t_game *game);
-void	determine_texture(t_game *game);
-void	cal_texture(t_game *game);
-void	draw_vertical_stripe(t_game *game, int x);
+int					render_frame(t_game *game);
+void				my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void				cast_rays(t_game *game, int x);
+void				cal_lineheight(t_game *game);
+void				determine_texture(t_game *game);
+void				cal_texture(t_game *game);
+void				draw_vertical_stripe(t_game *game, int x);
 
 //events
-void	init_hooks(t_game *game);
-int		key_press(int keycode, t_game *game);
-int 	key_release(int keycode, t_game *game);
-int 	close_window(t_game *game);
-void	player_move(t_game *game);
-void	player_rotate(t_game *game);
+void				init_hooks(t_game *game);
+int					key_press(int keycode, t_game *game);
+int					key_release(int keycode, t_game *game);
+int					close_window(t_game *game);
+void				player_move(t_game *game);
+void				player_rotate(t_game *game);
 
 //utils
-void	free_all(t_game *game);
+void				free_all(t_game *game);
 unsigned long long	get_time_ms(void);
-void	set_frame(t_game *game);
+void				set_frame(t_game *game);
 
 #endif
 

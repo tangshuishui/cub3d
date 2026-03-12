@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 12:12:59 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/06 18:23:00 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/12 17:40:33 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ static char	*dup_without_newline(char *line)
 
 static void	add_to_list(t_game *game, char *clean_line)
 {
-	t_map_list  *node;
-	t_map_list  *tmp;
+	t_map_list	*node;
+	t_map_list	*tmp;
 
 	node = malloc(sizeof(t_map_list));
 	if (!node)
@@ -105,5 +105,5 @@ void	convert_list_to_grid(t_game *game)
 		i++;
 	}
 	game->map.grid[i] = NULL;
-	game->map.raw_lines = NULL; 
+	game->map.raw_lines = NULL;
 }

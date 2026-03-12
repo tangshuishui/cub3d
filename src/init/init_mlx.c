@@ -6,7 +6,7 @@
 /*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 18:00:24 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/11 15:00:22 by yshi             ###   ########.fr       */
+/*   Updated: 2026/03/12 16:51:02 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,15 @@ void	init_mlx(t_game *game)
 // 辅助函数：加载单张纹理并获取其像素数据地址
 static void	load_texture(t_game *game, t_img *tex, char *path)
 {
-	// 1. 使用 mlx_xpm_file_to_image 读取 .xpm 文件
-	// 它会自动把图片的宽和高存入 tex->width 和 tex->height
-	tex->img_ptr = mlx_xpm_file_to_image(game->mlx, path, &tex->width, &tex->height);
+	tex->img_ptr = mlx_xpm_file_to_image(game->mlx, path, &tex->width,
+			&tex->height);
 	if (!tex->img_ptr)
 	{
 		printf("Error\nFailed to load texture: %s\n", path);
 		exit_err(game, "XPM loading failed");
 	}
-
-	// 2. 获取该图片的内存地址 (addr)
-	// 只有拿到了 addr，我们才能在渲染时用快速的位运算去提取某个 (x, y) 坐标的颜色
-	tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->line_len, &tex->endian);
+	tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->line_len,
+			&tex->endian);
 	if (!tex->addr)
 		exit_err(game, "Failed to get texture data address");
 }
@@ -58,7 +55,6 @@ static void	load_texture(t_game *game, t_img *tex, char *path)
 // 主加载函数：按照 0=NO, 1=SO, 2=WE, 3=EA 的顺序存入数组
 void	init_textures(t_game *game)
 {
-	// 这里的顺序极其重要！必须和你之前 determine_texture_dir 中的设定完全一致
 	load_texture(game, &game->textures[0], game->map.no_path);
 	load_texture(game, &game->textures[1], game->map.so_path);
 	load_texture(game, &game->textures[2], game->map.we_path);

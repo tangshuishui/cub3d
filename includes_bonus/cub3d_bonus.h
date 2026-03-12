@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 17:17:09 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/10 12:16:07 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/12 17:53:15 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 # define MMAP_TILE 15//小地图中每一个方格占多少像素
 # define MMAP_VIEW 4//向四周看多远（例如看 4 格，小地图就是 9x9 的网格）
 # define MMAP_OFFSET 20
-# define MMAP_SIZE ((2 * MMAP_VIEW + 1) * MMAP_TILE)
+// # define MMAP_SIZE ((2 * MMAP_VIEW + 1) * MMAP_TILE)
 
 typedef struct s_img {
 	void	*img_ptr;
@@ -119,68 +119,68 @@ typedef struct s_map {
 }	t_map;
 
 typedef struct s_poster {
-	t_img	anim_wall[8];// 海报有 8 帧
-	int		anim_frames;
+	t_img				anim_wall[8];
+	int					anim_frames;
 	unsigned long long	last_anim_time;
 }	t_poster;
 
 typedef struct s_game {
-	void		*mlx;
-	void		*win;
-	t_map		map;
-	t_player	player;
-	t_ray		ray;
-	t_img		textures[5];
-	t_img		screen;
+	void				*mlx;
+	void				*win;
+	t_map				map;
+	t_player			player;
+	t_ray				ray;
+	t_img				textures[5];
+	t_img				screen;
 	unsigned long long	last_time;
-	double		frame_time;
-	t_poster	anim;
-	int			fd;
-	char		*line;
+	double				frame_time;
+	t_poster			anim;
+	int					fd;
+	char				*line;
 }	t_game;
 
-int		main(int ac, char **av);
+int					main(int ac, char **av);
 
 //init
-void	init_data(t_game *game);
-void	init_mlx(t_game *game);
-void	init_textures(t_game *game);
-void	exit_err(t_game *game, char *msg);
-
+void				init_data(t_game *game);
+void				init_mlx(t_game *game);
+void				init_textures(t_game *game);
+void				exit_err(t_game *game, char *msg);
 
 //parse
-void	parsing(t_game *game, char *filename);
-void	parse_color(t_game *game, int *color_ptr, char *line, int i);
-void	parse_map(t_game *game, char *line);
-void	convert_list_to_grid(t_game *game);
-void	format_map(t_game *game);
-void	validate_map(t_game *game);
-void	init_player_position(t_game *game, int x, int y, char dir);
+void				parsing(t_game *game, char *filename);
+void				parse_color(t_game *game, int *color_ptr, char *line,
+						int i);
+void				parse_map(t_game *game, char *line);
+void				convert_list_to_grid(t_game *game);
+void				format_map(t_game *game);
+void				validate_map(t_game *game);
+void				init_player_position(t_game *game, int x, int y, char dir);
 
 //render
-int		render_frame(t_game *game);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void	cast_rays(t_game *game);
-void	cal_lineheight(t_game *game);
-void	determine_texture(t_game *game);
-void	cal_texture(t_game *game);
-void	draw_vertical_stripe(t_game *game, int x);
-void	draw_minimap(t_game *game);
+int					render_frame(t_game *game);
+void				my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void				cast_rays(t_game *game);
+void				cal_lineheight(t_game *game);
+void				determine_texture(t_game *game);
+void				cal_texture(t_game *game);
+void				draw_vertical_stripe(t_game *game, int x);
+void				draw_minimap(t_game *game);
 
 //events
-void	init_hooks(t_game *game);
-int		key_press(int keycode, t_game *game);
-int 	key_release(int keycode, t_game *game);
-int 	close_window(t_game *game);
-int		mouse_move_hook(int x, int y, t_game *game);
-void	open_door(t_game *game);
-void	player_move(t_game *game);
-void	player_rotate(t_game *game);
-void	rotate_vectors(t_player *p, double rot_speed);
+void				init_hooks(t_game *game);
+int					key_press(int keycode, t_game *game);
+int					key_release(int keycode, t_game *game);
+int					close_window(t_game *game);
+int					mouse_move_hook(int x, int y, t_game *game);
+void				open_door(t_game *game);
+void				player_move(t_game *game);
+void				player_rotate(t_game *game);
+void				rotate_vectors(t_player *p, double rot_speed);
 
 //utils
-void	free_all(t_game *game);
+void				free_all(t_game *game);
 unsigned long long	get_time_ms(void);
-void	set_frame(t_game *game);
+void				set_frame(t_game *game);
 
 #endif

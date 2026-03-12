@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 18:20:55 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/10 17:15:24 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/12 18:02:08 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	free_map_lines(t_map_list*lst)
 
 static void	free_map(t_map *map)
 {
-	int i;
+	int	i;
 
 	if (map->no_path)
 		free(map->no_path);
@@ -56,7 +56,7 @@ static void	free_map(t_map *map)
 
 static void	free_graph(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 5)

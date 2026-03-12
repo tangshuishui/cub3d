@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:42:32 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/10 16:09:07 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/12 16:51:57 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	key_press(int keycode, t_game *game)
 }
 
 // 2. 松开按键时，将对应的布尔值设为 false
-int key_release(int keycode, t_game *game)
+int	key_release(int keycode, t_game *game)
 {
 	if (keycode == KEY_W)
 		game->player.key_w = false;
@@ -54,7 +54,7 @@ int key_release(int keycode, t_game *game)
 }
 
 // 3. 点击窗口的红叉时退出
-int close_window(t_game *game)
+int	close_window(t_game *game)
 {
 	free_all(game);
 	exit(0);
@@ -63,10 +63,7 @@ int close_window(t_game *game)
 
 void	init_hooks(t_game *game)
 {
-	// 2 是 KeyPress, 1L<<0 是 KeyPressMask
 	mlx_hook(game->win, 2, 1L << 0, key_press, game);
-	// 3 是 KeyRelease, 1L<<1 是 KeyReleaseMask
 	mlx_hook(game->win, 3, 1L << 1, key_release, game);
-	// 17 是 DestroyNotify (点红叉)
 	mlx_hook(game->win, 17, 0, close_window, game);
 }

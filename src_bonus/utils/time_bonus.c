@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hanwang <hanwang@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 15:52:43 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/03 18:08:00 by hanwang          ###   ########.fr       */
+/*   Updated: 2026/03/12 17:59:28 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 unsigned long long	get_time_ms(void)
 {
-	struct timeval  tv;
+	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	// 秒转毫秒 + 微秒转毫秒
-	return ((unsigned long long)(tv.tv_sec) * 1000 + (unsigned long long)(tv.tv_usec) / 1000);
+	return ((unsigned long long)(tv.tv_sec) *1000
+	+ (unsigned long long)(tv.tv_usec) / 1000);
 }
 
 void	set_frame(t_game *game)
