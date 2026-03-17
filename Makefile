@@ -9,7 +9,24 @@ CFLAGS		= -Wall -Wextra -Werror
 RM			= rm -rf
 
 SRC_DIR		= src/
+SRC_FILES   = main.c \
+              events/hooks.c events/movement.c events/rotation.c \
+              init/init_data.c init/init_mlx.c \
+              parser/format_map.c parser/init_player.c parser/parse.c \
+              parser/parse_color.c parser/parse_map.c parser/validate_map.c \
+              render/calculate.c render/draw.c render/raycast.c render/render.c \
+              utils/cleanup.c utils/time.c
 SRC_B_DIR	= src_bonus/
+SRC_B_FILES = main_bonus.c \
+              events/hooks_bonus.c events/interact_bonus.c \
+              events/movement_bonus.c events/rotation_bonus.c \
+              init/init_data_bonus.c init/init_mlx_bonus.c \
+              parser/format_map_bonus.c parser/init_player_bonus.c \
+              parser/parse_bonus.c parser/parse_color_bonus.c \
+              parser/parse_map_bonus.c parser/validate_map_bonus.c \
+              render/calculate_bonus.c render/draw_bonus.c \
+              render/minimap_bonus.c render/raycast_bonus.c render/render_bonus.c \
+              utils/cleanup_bonus.c utils/time_bonus.c
 OBJ_DIR		= obj/
 LIBFT_DIR	= libft/
 LIBFT		= $(LIBFT_DIR)libft.a
@@ -25,11 +42,11 @@ HEADER_B	= $(INCLU_B_DIR)cub3d_bonus.h
 
 LDFLAGS		= -L/usr/lib -lXext -lX11 -lm -lz
 
-SRCS	= $(shell find $(SRC_DIR) -name "*.c")
-OBJS	= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
+SRCS        = $(addprefix $(SRC_DIR), $(SRC_FILES))
+OBJS		= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
-SRCS_B	= $(shell find $(SRC_B_DIR) -name "*.c")
-OBJS_B	= $(patsubst $(SRC_B_DIR)%.c, $(OBJ_DIR)bonus/%.o, $(SRCS_B))
+SRCS_B      = $(addprefix $(SRC_B_DIR), $(SRC_B_FILES))
+OBJS_B		= $(patsubst $(SRC_B_DIR)%.c, $(OBJ_DIR)bonus/%.o, $(SRCS_B))
 
 all: $(NAME)
 

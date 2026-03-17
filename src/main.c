@@ -6,7 +6,7 @@
 /*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 17:14:30 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/12 17:27:24 by yshi             ###   ########.fr       */
+/*   Updated: 2026/03/17 13:59:51 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	main(int ac, char **av)
 	init_mlx(&game);
 	init_textures(&game);
 	init_hooks(&game);
-	mlx_loop_hook(game.mlx, render_frame, &game);
+	mlx_loop_hook(game.mlx, (int (*)())(void *)render_frame, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yshi <yshi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 14:42:32 by hanwang           #+#    #+#             */
-/*   Updated: 2026/03/12 16:51:57 by yshi             ###   ########.fr       */
+/*   Updated: 2026/03/17 13:59:11 by yshi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	close_window(t_game *game)
 
 void	init_hooks(t_game *game)
 {
-	mlx_hook(game->win, 2, 1L << 0, key_press, game);
-	mlx_hook(game->win, 3, 1L << 1, key_release, game);
-	mlx_hook(game->win, 17, 0, close_window, game);
+	mlx_hook(game->win, 2, 1L << 0, (int (*)())(void *)key_press, game);
+	mlx_hook(game->win, 3, 1L << 1, (int (*)())(void *)key_release, game);
+	mlx_hook(game->win, 17, 0, (int (*)())(void *)close_window, game);
 }
